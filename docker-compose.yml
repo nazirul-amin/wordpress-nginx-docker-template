@@ -3,6 +3,8 @@ services:
     image: mysql:8.0
     container_name: wordpress-db
     restart: unless-stopped
+    ports:
+      - "${MYSQL_PORT}:3306"
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
@@ -13,7 +15,7 @@ services:
       - db_data:/var/lib/mysql
 
   wordpress:
-    image: wordpress:php8.5-fpm
+    image: wordpress:php${WORDPRESS_PHP_VERSION}-fpm
     container_name: wordpress-php
     depends_on:
       - db

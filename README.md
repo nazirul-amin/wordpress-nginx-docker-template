@@ -1,41 +1,6 @@
 # WordPress Docker
 
-Minimal local WordPress development setup using Docker Compose.
-
-## Project Structure
-
-```text
-.
-├── docker-compose.yml
-├── .env
-├── .env.example
-├── .gitignore
-├── README.md
-├── wp-content/
-│   ├── mu-plugins/
-│   ├── plugins/
-│   ├── themes/
-│   └── uploads/
-├── db/
-│   └── backups/
-├── nginx/
-├── php/
-└── scripts/
-```
-
-## Services
-
-- `nginx` on `http://localhost:8080`
-- `wordpress` running PHP-FPM
-- `mysql` for the WordPress database
-
-## How It Works
-
-- Nginx serves the site and forwards PHP requests to WordPress PHP-FPM.
-- WordPress core is stored in a Docker named volume.
-- Local custom code lives in `wp-content/`.
-- MySQL data persists in a Docker named volume.
-- `.env.example` is the tracked template for local configuration.
+Local WordPress with Docker Compose.
 
 ## Setup
 
@@ -44,43 +9,58 @@ cp .env.example .env
 docker compose up -d
 ```
 
-Open `http://localhost:8080` and complete the WordPress installer.
+Open `http://localhost:8080`.
 
-## Common Development Paths
+## Paths
 
-- Themes: `wp-content/themes/your-theme`
-- Plugins: `wp-content/plugins/your-plugin`
-- Must-use plugins: `wp-content/mu-plugins`
-- Media uploads: `wp-content/uploads`
-- Database backups: `db/backups`
-- Nginx config: `nginx/default.conf`
-- PHP config: `php/custom.ini`
+- Theme: `wp-content/themes/project-theme`
+- Plugin: `wp-content/plugins/project-plugin`
+- MU plugin: `wp-content/mu-plugins/project-mu-plugins`
+- Uploads: `wp-content/uploads`
+- Nginx: `nginx/default.conf`
+- PHP: `php/custom.ini`
 
-## Stop
+Rename the placeholder folders to your real slugs and update `.gitignore` if needed.
+
+## Commands
 
 ```bash
+docker compose up -d
 docker compose down
-```
-
-## Reset Data
-
-This removes containers and the database volume.
-
-```bash
 docker compose down -v
 ```
 
-## Configuration
+## Recreate
 
-Update `.env` to change:
+```bash
+docker compose up -d --force-recreate wordpress nginx
+docker compose up -d --force-recreate db
+docker compose up -d --force-recreate
+```
 
-- database name
-- database user and password
-- MySQL root password
-- WordPress port
+## Env
 
-## Notes
+- `WORDPRESS_PORT`
+- `WORDPRESS_PHP_VERSION`
+- `MYSQL_PORT`
+- `MYSQL_DATABASE`
+- `MYSQL_USER`
+- `MYSQL_PASSWORD`
+- `MYSQL_ROOT_PASSWORD`
 
-- `wp-content/uploads/` is ignored by git because it is generated content.
-- WordPress core is not committed to git; it is created inside the `wordpress_core` Docker volume.
-- Default credentials in `.env.example` are for local development only.
+## DB
+
+- Host: `127.0.0.1`
+- Port: `MYSQL_PORT`
+- Database: `MYSQL_DATABASE`
+- Username: `MYSQL_USER`
+- Password: `MYSQL_PASSWORD`
+
+## Debugging
+
+```bash
+docker compose ps
+docker compose logs -f wordpress nginx db
+docker compose exec wordpress sh
+docker compose exec db mysql -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE"
+```

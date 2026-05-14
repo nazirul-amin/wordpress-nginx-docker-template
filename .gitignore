@@ -13,6 +13,30 @@
 # WordPress generated content
 wp-content/uploads/
 !wp-content/uploads/.gitkeep
+wp-content/uploads/*
+!wp-content/uploads/.gitkeep
+
+# Restore archives and runtime caches
+*.wpress
+*.zip
+wp-content/ai1wm-backups/
+wp-content/languages/
+wp-content/litespeed/
+
+# Imported WordPress core-adjacent content
+wp-content/index.php
+wp-content/plugins/*
+!wp-content/plugins/.gitkeep
+!wp-content/plugins/project-plugin/
+!wp-content/plugins/project-plugin/**
+wp-content/themes/*
+!wp-content/themes/.gitkeep
+!wp-content/themes/project-theme/
+!wp-content/themes/project-theme/**
+wp-content/mu-plugins/*
+!wp-content/mu-plugins/.gitkeep
+!wp-content/mu-plugins/project-mu-plugins/
+!wp-content/mu-plugins/project-mu-plugins/**
 
 # Local database artifacts
 db/backups/*.sql
