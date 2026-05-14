@@ -1,0 +1,19 @@
+.DS_Store
+
+# Local environment overrides
+.env
+.env.*
+!.env.example
+
+# Editor and logs
+*.log
+.idea/
+.vscode/
+
+# WordPress generated content
+wp-content/uploads/
+!wp-content/uploads/.gitkeep
+
+# Local database artifacts
+db/backups/*.sql
+db/backups/*.sql.gz
