@@ -1,6 +1,6 @@
-# WordPress Docker
+# WordPress Docker Template
 
-Local WordPress with Docker Compose.
+WordPress with Docker Compose.
 
 ## Setup
 
