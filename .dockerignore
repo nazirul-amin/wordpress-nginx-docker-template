@@ -1,0 +1,29 @@
+.git
+.gitignore
+.dockerignore
+
+# Local environment and editor files
+.env
+.env.*
+!.env.example
+.DS_Store
+.idea/
+.vscode/
+*.log
+
+# Runtime and backup artifacts
+db/backups/
+*.sql
+*.sql.gz
+*.wpress
+*.zip
+
+# WordPress generated content and caches
+wp-content/uploads/
+wp-content/ai1wm-backups/
+wp-content/languages/
+wp-content/litespeed/
+
+# Dependency directories commonly created inside custom themes/plugins
+node_modules/
+vendor/
